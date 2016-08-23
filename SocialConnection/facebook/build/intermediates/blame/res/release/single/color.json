@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/manikandan/Downloads/SocialConnection/facebook/build/intermediates/res/merged/release/color/com_facebook_send_button_text_color.xml",
+        "source": "/Users/manikandan/Downloads/SocialConnection/facebook/src/main/res/color/com_facebook_send_button_text_color.xml"
+    },
+    {
+        "merged": "/Users/jayamurugan/Desktop/SampleApp/SocialConnection/facebook/build/intermediates/res/merged/release/color/com_facebook_send_button_text_color.xml",
+        "source": "/Users/jayamurugan/Desktop/SampleApp/SocialConnection/facebook/src/main/res/color/com_facebook_send_button_text_color.xml"
+    },
+    {
+        "merged": "/Users/manikandan/Downloads/SocialConnection/facebook/build/intermediates/res/merged/release/color/com_facebook_button_text_color.xml",
+        "source": "/Users/manikandan/Downloads/SocialConnection/facebook/src/main/res/color/com_facebook_button_text_color.xml"
+    },
+    {
+        "merged": "/Users/jayamurugan/Desktop/SampleApp/SocialConnection/facebook/build/intermediates/res/merged/release/color/com_facebook_button_text_color.xml",
+        "source": "/Users/jayamurugan/Desktop/SampleApp/SocialConnection/facebook/src/main/res/color/com_facebook_button_text_color.xml"
+    }
+]
