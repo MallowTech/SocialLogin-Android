@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/appBackground"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:id="@+id/main_ui_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_facebook"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_30dp"
+            android:background="@drawable/me_btn_bg"
+            android:drawableLeft="@drawable/icon_facebook"
+            android:padding="@dimen/spacing_16"
+            android:text="@string/facebook_text"
+            android:textAllCaps="false"
+            android:textSize="@dimen/font_24"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_or"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btn_facebook"
+            android:layout_centerHorizontal="true"
+            android:text="@string/or_text"
+            android:textSize="@dimen/font_16"
+            />
+
+
+        <Button
+            android:id="@+id/btn_linked_in"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_or"
+            android:layout_margin="@dimen/padding_30dp"
+            android:background="@drawable/me_btn_bg"
+            android:drawableLeft="@drawable/icon_linkedin"
+            android:padding="@dimen/spacing_16"
+            android:text="@string/linedin_text"
+            android:textAllCaps="false"
+            android:textSize="@dimen/font_24"/>
+
+
+    </RelativeLayout>
+</RelativeLayout>
+
+
