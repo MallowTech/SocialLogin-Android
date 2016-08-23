@@ -48,7 +48,7 @@
             android:background="@drawable/me_btn_bg"
             android:drawableLeft="@drawable/icon_linkedin"
             android:padding="@dimen/spacing_16"
-            android:text="@string/linedin_text"
+            android:text="@string/linked_in"
             android:textAllCaps="false"
             android:textSize="@dimen/font_24"/>
 

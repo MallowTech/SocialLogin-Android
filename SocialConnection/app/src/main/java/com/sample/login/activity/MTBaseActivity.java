@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.sample.login.R;
+
 /**
  * Created by jayamurugan on 23/08/16.
  */
@@ -68,7 +70,7 @@ public class MTBaseActivity extends AppCompatActivity {
         builder.setMessage(message)
                 .setTitle(title)
                 .setCancelable(false)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                     }

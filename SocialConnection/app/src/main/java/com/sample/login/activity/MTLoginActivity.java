@@ -21,7 +21,7 @@ import com.linkedin.platform.errors.LIAuthError;
 import com.linkedin.platform.listeners.AuthListener;
 import com.linkedin.platform.utils.Scope;
 import com.sample.login.MTAppConstants;
-import com.sample.login.MTPreferenceManager;
+import com.sample.login.MTSharedPreferenceManager;
 import com.sample.login.MTUtilities;
 import com.sample.login.R;
 
@@ -33,7 +33,7 @@ import java.util.Arrays;
 public class MTLoginActivity extends MTBaseActivity {
     private final String TAG = this.getClass().getSimpleName();
     private CallbackManager callbackManager;
-    private Button linedInBtn, facebookLogin;
+    private Button linkedInBtn, facebookLogin;
     private ArrayList<String> titleValues = new ArrayList<>();
     private ArrayList<String> detailValues = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class MTLoginActivity extends MTBaseActivity {
         FacebookSdk.sdkInitialize(this.getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
 
-        linedInBtn = (Button) findViewById(R.id.btn_linked_in);
+        linkedInBtn = (Button) findViewById(R.id.btn_linked_in);
         facebookLogin = (Button) findViewById(R.id.btn_facebook);
 
         facebookLogin.setOnClickListener(new View.OnClickListener() {
@@ -62,11 +62,11 @@ public class MTLoginActivity extends MTBaseActivity {
             }
         });
 
-        linedInBtn.setOnClickListener(new View.OnClickListener() {
+        linkedInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (MTUtilities.checkNetworkConnection(MTLoginActivity.this)) {
-                    linedInConnection();
+                    linkedInConnection();
                 } else {
                     showAlertDialog(getString(R.string.info), getString(R.string.no_internet_connection));
                 }
@@ -76,6 +76,7 @@ public class MTLoginActivity extends MTBaseActivity {
 
     /**
      * Method to valid the login state
+     *
      * @return
      */
     public boolean isLoggedIn() {
@@ -83,7 +84,7 @@ public class MTLoginActivity extends MTBaseActivity {
         return accessToken != null;
     }
 
-    private void linedInConnection() {
+    private void linkedInConnection() {
         LISessionManager.getInstance(getApplicationContext()).init(MTLoginActivity.this, buildScope(), new AuthListener() {
             @Override
             public void onAuthSuccess() {
@@ -91,7 +92,7 @@ public class MTLoginActivity extends MTBaseActivity {
                 detailValues.clear();
                 Intent intent = new Intent(MTLoginActivity.this, MTDashboardActivity.class);
                 intent.putExtra(MTAppConstants.IMAGE_URL, "");
-                intent.putExtra(MTAppConstants.CONNECTION, "LindedIn");
+                intent.putExtra(MTAppConstants.CONNECTION, "linkedIn");
                 intent.putExtra(MTAppConstants.TITLE_VALUES, titleValues);
                 intent.putExtra(MTAppConstants.DETAIL_VALUES, detailValues);
                 startActivity(intent);
@@ -131,7 +132,6 @@ public class MTLoginActivity extends MTBaseActivity {
                     new FacebookCallback<LoginResult>() {
                         @Override
                         public void onSuccess(LoginResult loginResult) {
-                            System.out.println("Success");
                             GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
                                     new GraphRequest.GraphJSONObjectCallback() {
                                         @Override
@@ -145,7 +145,7 @@ public class MTLoginActivity extends MTBaseActivity {
                                                     String id = "";
                                                     if (object.has("id")) {
                                                         id = object.getString("id");
-                                                        MTPreferenceManager.setUserId(id, MTLoginActivity.this);
+                                                        MTSharedPreferenceManager.setUserId(id, MTLoginActivity.this);
                                                     }
                                                     String first_name = "";
                                                     if (object.has("first_name")) {
@@ -180,10 +180,9 @@ public class MTLoginActivity extends MTBaseActivity {
                                                     intent.putExtra(MTAppConstants.DETAIL_VALUES, detailValues);
                                                     startActivity(intent);
                                                 } catch (Exception e) {
-                                                    e.printStackTrace();
+                                                    Log.e(TAG, "Error" + e.getLocalizedMessage());
                                                 }
                                             } else {
-                                                System.out.println("User problem");
                                                 Log.d(TAG, "User problem");
                                             }
                                         }
@@ -207,7 +206,7 @@ public class MTLoginActivity extends MTBaseActivity {
                         }
                     });
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error" + e.getLocalizedMessage());
             showAlertDialog(getString(R.string.error), getString(R.string.login_error));
         }
     }

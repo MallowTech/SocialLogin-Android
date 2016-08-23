@@ -9,7 +9,4 @@ public class MTAppConstants {
     public static String CONNECTION = "connection";
     public static String TITLE_VALUES = "titleValues";
     public static String DETAIL_VALUES = "detailValues";
-    public static String UPCOMING_EXAM = "upcoming_exam";
-    public static String COMPLETED_EXAM = "completed_exam";
-    public static String SUBJECT = "subject";
 }

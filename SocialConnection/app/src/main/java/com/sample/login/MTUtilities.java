@@ -6,7 +6,8 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 public class MTUtilities {
-    private static final String TAG = "MEUtilities";
+    private static final String TAG = "MTUtilities";
+
     /**
      * Method to check the network connection
      *

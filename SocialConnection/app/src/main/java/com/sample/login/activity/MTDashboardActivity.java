@@ -21,7 +21,7 @@ import com.linkedin.platform.errors.LIApiError;
 import com.linkedin.platform.listeners.ApiListener;
 import com.linkedin.platform.listeners.ApiResponse;
 import com.sample.login.MTAppConstants;
-import com.sample.login.MTPreferenceManager;
+import com.sample.login.MTSharedPreferenceManager;
 import com.sample.login.R;
 import com.squareup.picasso.Picasso;
 
@@ -78,7 +78,7 @@ public class MTDashboardActivity extends MTBaseActivity {
                 } else {
                     LISessionManager.getInstance(MTDashboardActivity.this).clearSession();
                 }
-                MTPreferenceManager.setUserId("", MTDashboardActivity.this);
+                MTSharedPreferenceManager.setUserId("", MTDashboardActivity.this);
                 Intent intent = new Intent(MTDashboardActivity.this, MTLoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -100,9 +100,10 @@ public class MTDashboardActivity extends MTBaseActivity {
         }
     }
 
-    /*Once User's can authenticated,
-      It make an HTTP GET request to LinkedIn's REST API using the currently authenticated user's credentials.
-      If successful, A LinkedIn ApiResponse object containing all of the relevant aspects of the server's response will be returned.
+    /**
+     * Once User's can authenticated,
+     * It make an HTTP GET request to LinkedIn's REST API using the currently authenticated user's credentials.
+     * If successful, A LinkedIn ApiResponse object containing all of the relevant aspects of the server's response will be returned.
      */
     public void linkedInApiHelper() {
         APIHelper apiHelper = APIHelper.getInstance(getApplicationContext());
@@ -113,7 +114,7 @@ public class MTDashboardActivity extends MTBaseActivity {
                     setProfile(result.getResponseDataAsJson());
                     progress.dismiss();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Error " + e.getLocalizedMessage());
                 }
             }
 
@@ -131,12 +132,12 @@ public class MTDashboardActivity extends MTBaseActivity {
      */
     public void setProfile(JSONObject response) {
         try {
-            if(response!=null) {
+            if (response != null) {
                 titleValues.clear();
                 detailValues.clear();
                 if (response.has("id")) {
                     String id = response.getString("id");
-                    MTPreferenceManager.setUserId(id, MTDashboardActivity.this);
+                    MTSharedPreferenceManager.setUserId(id, MTDashboardActivity.this);
                 }
                 if (response.has("firstName")) {
                     String firstName = response.getString("firstName");
@@ -150,9 +151,9 @@ public class MTDashboardActivity extends MTBaseActivity {
                 }
                 if (response.has("pictureUrls")) {
                     JSONObject jsonObject = response.getJSONObject("pictureUrls");
-                    if (jsonObject.has("values")){
+                    if (jsonObject.has("values")) {
                         JSONArray jsonArray = jsonObject.getJSONArray("values");
-                        for (int i = 0; i <jsonArray.length() ; i++) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             imageUrl = jsonArray.getString(0);
                         }
                     }
